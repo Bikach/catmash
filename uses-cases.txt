@@ -1,12 +1,16 @@
 
 
-- page vote :
+- Page vote (page d'acceuil de l'app) :
 
-. afficher deux chats, l'un à coter de l'autre
-. click chat de gauche -> incremente +1 nombre de vote chat de gauche
-    -> chat de droite change (effet inverse lorsque l'on click sur le chat de droite)
+. Afficher deux chats, l'un à coter de l'autre.
 
-- page résultat :
+  Système de vote :
 
-. affiche le classement des chats dans l'ordre décroisssant de votes
-    -> affiche le nombre de voix pour chaque chat
+  click chat de gauche -> incremente +1 nombre de votes chat de gauche
+    -> chat de droite change (effet inverse lorsque l'on click sur le chat de droite).
+
+- Page résultat :
+
+. Afficher le classement des chats
+    -> dans l'ordre décroisant du nombre de votes
+    -> avec le nombre de voix total
