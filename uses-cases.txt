@@ -1,0 +1,12 @@
+
+
+- page vote :
+
+. afficher deux chats, l'un à coter de l'autre
+. click chat de gauche -> incremente +1 nombre de vote chat de gauche
+    -> chat de droite change (effet inverse lorsque l'on click sur le chat de droite)
+
+- page résultat :
+
+. affiche le classement des chats dans l'ordre décroisssant de votes
+    -> affiche le nombre de voix pour chaque chat
