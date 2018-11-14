@@ -37,6 +37,6 @@ public class CatDTO {
     }
 
     public void setNumberVote(int numberVote) {
-        this.numberVote = numberVote;
+        this.numberVote += numberVote;
     }
 }
