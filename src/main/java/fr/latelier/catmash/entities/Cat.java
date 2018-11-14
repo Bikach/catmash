@@ -47,6 +47,6 @@ public class Cat implements Serializable {
     }
 
     public void setNumberVote(int numberVote) {
-        this.numberVote = numberVote;
+        this.numberVote += numberVote;
     }
 }
