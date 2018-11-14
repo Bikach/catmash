@@ -1,23 +1,23 @@
 package fr.latelier.catmash;
-import java.io.BufferedReader;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.latelier.catmash.dao.ICatRepository;
+import fr.latelier.catmash.dto.CatDTO;
+import fr.latelier.catmash.entities.Cat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import sun.net.www.http.HttpClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.*;
 
 @SpringBootApplication
 public class CatmashApplication implements CommandLineRunner {
@@ -30,24 +30,28 @@ public class CatmashApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception, ClientProtocolException {
-        HttpClient client = new DefaultHttpClient();
+    public void run(String... args) throws Exception {
 
-        HttpGet request = new HttpGet('http://restUrl');
+//        URL url = new URL("https://latelier.co/data/cats.json");
+//        try (InputStream inputStream = url.openStream();
+//             JsonReader jsonReader = Json.createReader(inputStream)) {
+//
+//            JsonObject jsonObject = jsonReader.readObject();
+//            JsonArray jsonArray = jsonObject.getJsonArray("images");
+//
+//            System.out.println(jsonArray);
+//
+//        }
+//
+//        RestTemplate restTemplate = new RestTemplate();
+//        ResponseEntity<CatDTO> response = restTemplate.getForEntity(
+//                "https://latelier.co/data/cats.json",
+//                CatDTO.class);
+//        CatDTO catDTOS = response.getBody();
+//        List<CatDTO> catDTOList = Arrays.asList(catDTOS);
+//
+//        System.out.println(catDTOList.size());
 
-        HttpResponse response = client.execute(request);
-
-        BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
-
-        String line = '';
-
-        while ((line = rd.readLine()) != null) {
-
-            System.out.println(line);
-
-        }
-
-    }
-
+      
     }
 }
