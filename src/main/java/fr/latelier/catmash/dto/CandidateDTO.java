@@ -1,16 +1,16 @@
 package fr.latelier.catmash.dto;
 
 
-public class CatDTO {
+public class CandidateDTO {
 
     private String id;
     private String url;
     private int numberVote;
 
-    public CatDTO() {
+    public CandidateDTO() {
     }
 
-    public CatDTO(String id, String url, int numberVote) {
+    public CandidateDTO(String id, String url, int numberVote) {
         this.id = id;
         this.url = url;
         this.numberVote = numberVote;
@@ -37,6 +37,6 @@ public class CatDTO {
     }
 
     public void setNumberVote(int numberVote) {
-        this.numberVote = numberVote;
+        this.numberVote += numberVote;
     }
 }

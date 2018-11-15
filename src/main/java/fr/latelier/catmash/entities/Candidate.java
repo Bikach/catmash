@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Cat implements Serializable {
+public class Candidate implements Serializable {
 
     @Id
     @Column(name = "cat_id")
@@ -17,10 +17,10 @@ public class Cat implements Serializable {
     private int numberVote;
 
 
-    public Cat() {
+    public Candidate() {
     }
 
-    public Cat(String id, String url, int numberVote) {
+    public Candidate(String id, String url, int numberVote) {
         this.id = id;
         this.url = url;
         this.numberVote = numberVote;
@@ -47,6 +47,6 @@ public class Cat implements Serializable {
     }
 
     public void setNumberVote(int numberVote) {
-        this.numberVote = numberVote;
+        this.numberVote += numberVote;
     }
 }
