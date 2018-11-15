@@ -30,7 +30,7 @@ class DTOCastTest {
 
     @Test
     void candidateDTOMustGetAllCandidateData(){
-        candidateDTO = DTOCast.transfertToCandidateDTOD(candidate);
+        candidateDTO = DTOCast.transfertToCandidateDTO(candidate);
         assertEquals(candidateDTO.getId(), "candidate_id");
         assertEquals(candidateDTO.getUrl(), "http//candidate.com");
         assertEquals(candidateDTO.getNumberVote(), 20);

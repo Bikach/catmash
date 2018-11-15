@@ -1,5 +1,7 @@
 package fr.latelier.catmash.entities;
 
+import org.hibernate.validator.constraints.URL;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,6 +13,7 @@ public class Candidate implements Serializable {
     @Id
     @Column(name = "cat_id")
     private String id;
+    @URL
     @Column(name = "picture_path")
     private String url;
     @Column(name = "number_vote")
@@ -47,6 +50,6 @@ public class Candidate implements Serializable {
     }
 
     public void setNumberVote(int numberVote) {
-        this.numberVote += numberVote;
+        this.numberVote = numberVote;
     }
 }

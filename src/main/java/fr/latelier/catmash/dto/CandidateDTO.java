@@ -1,9 +1,12 @@
 package fr.latelier.catmash.dto;
 
 
+import org.hibernate.validator.constraints.URL;
+
 public class CandidateDTO {
 
     private String id;
+    @URL
     private String url;
     private int numberVote;
 
@@ -37,6 +40,6 @@ public class CandidateDTO {
     }
 
     public void setNumberVote(int numberVote) {
-        this.numberVote += numberVote;
+        this.numberVote = numberVote;
     }
 }

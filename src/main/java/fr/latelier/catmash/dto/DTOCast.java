@@ -9,7 +9,7 @@ public class DTOCast {
         return new Candidate(candidateDTO.getId(), candidateDTO.getUrl(), candidateDTO.getNumberVote());
     }
 
-    public static CandidateDTO transfertToCandidateDTOD(Candidate candidate){
+    public static CandidateDTO transfertToCandidateDTO(Candidate candidate){
         return new CandidateDTO(candidate.getId(), candidate.getUrl(), candidate.getNumberVote());
     }
 
