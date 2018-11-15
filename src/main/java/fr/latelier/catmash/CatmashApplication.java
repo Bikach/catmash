@@ -39,6 +39,6 @@ public class CatmashApplication implements CommandLineRunner {
 //
 //        System.out.println(catDTOList.size());
 
-      
+
     }
 }
