@@ -1,28 +1,21 @@
 package fr.latelier.catmash;
 
-import fr.latelier.catmash.Exception.CandidateException;
-import fr.latelier.catmash.dao.ICandidateRepository;
+import fr.latelier.catmash.dao.CandidateRepository;
 import fr.latelier.catmash.dto.CandidateDTO;
-import fr.latelier.catmash.dto.DTOCast;
-import fr.latelier.catmash.entities.Candidate;
-import fr.latelier.catmash.services.ElectionServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 @SpringBootApplication
 public class CatmashApplication implements CommandLineRunner {
 
     @Autowired
-    ICandidateRepository candidateRepository;
+    private CandidateRepository candidateRepository;
 
-    @Autowired
-    ElectionServiceImp electionServiceImp;
+
+    //@Autowired
+    //ElectionServiceImp electionServiceImp;
 
     public static void main(String[] args) {
         SpringApplication.run(CatmashApplication.class, args);
@@ -48,8 +41,14 @@ public class CatmashApplication implements CommandLineRunner {
         candidateRepository.saveAll(candidateList);
 */
 
+//        Candidate c = new Candidate("9pu", "http://25.media.tumblr.com/tumblr_m2p6dxhxul1qdvz31o1_500.jpg", 100);
+//
+//        candidateRepository.save(c);
 
+//        CandidateDTO candidateDTO = candidateRepository.findACandidateById("3kj");
+//        System.out.println(candidateDTO.getId());
 
+//        electionServiceImp.winnerCandidateUpdate("3kj");
     }
 
 }

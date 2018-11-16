@@ -1,8 +1,10 @@
 package fr.latelier.catmash.services;
 
 import fr.latelier.catmash.entities.Candidate;
+import org.springframework.stereotype.Service;
 
-public interface IElectionService {
+@Service
+public interface ElectionService {
 
     void winnerCandidateUpdate(String idWinCandidate);
     

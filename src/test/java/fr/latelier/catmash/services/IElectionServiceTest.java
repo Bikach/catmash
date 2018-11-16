@@ -1,21 +1,17 @@
 package fr.latelier.catmash.services;
 
-import fr.latelier.catmash.dao.ICandidateRepository;
+import fr.latelier.catmash.Exception.CandidateException;
+import fr.latelier.catmash.dao.CandidateRepository;
 import fr.latelier.catmash.dto.CandidateDTO;
-import fr.latelier.catmash.entities.Candidate;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,21 +20,27 @@ public class IElectionServiceTest {
     private final String EXISTING_ID = "tt";
 
     @Mock
-    private ICandidateRepository candidateRepository;
+    private CandidateRepository candidateRepository;
 
     @InjectMocks
-    private ElectionServiceImp electionServiceImp;
+    private ElectionServiceImpl electionServiceImp;
 
 
     @Test
     public void shouldAddOneVoteToTheSelectedCandidate(){
-        electionServiceImp.winnerCandidateUpdate(EXISTING_ID);
-        Optional<Candidate> candidateOp = candidateRepository.findById(EXISTING_ID);
-        Candidate candidate = candidateOp.get();
-        assertEquals(33, candidate.getNumberVote());
+        doNothing().when(electionServiceImp).winnerCandidateUpdate(EXISTING_ID);
+        CandidateDTO candidateDTO = candidateRepository.findACandidateById(EXISTING_ID);
+        assertEquals(33, candidateDTO.getNumberVote());
     }
 
 
+    @Test
+    public void shouldReturnCandidateExceptionWhenTheIdDoesNotExist(){
+        doThrow(new CandidateException())
+                .when(electionServiceImp)
+                .winnerCandidateUpdate("bmp");
+
+    }
 
 
 
