@@ -2,6 +2,7 @@ package fr.latelier.catmash;
 
 import fr.latelier.catmash.dao.CandidateRepository;
 import fr.latelier.catmash.dto.CandidateDTO;
+import fr.latelier.catmash.services.ElectionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,8 +15,8 @@ public class CatmashApplication implements CommandLineRunner {
     private CandidateRepository candidateRepository;
 
 
-    //@Autowired
-    //ElectionServiceImp electionServiceImp;
+    @Autowired
+    ElectionServiceImpl electionServiceImp;
 
     public static void main(String[] args) {
         SpringApplication.run(CatmashApplication.class, args);
