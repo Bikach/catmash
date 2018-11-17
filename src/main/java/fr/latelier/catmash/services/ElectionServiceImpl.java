@@ -3,9 +3,10 @@ package fr.latelier.catmash.services;
 
 import fr.latelier.catmash.dao.CandidateRepository;
 import fr.latelier.catmash.dto.CandidateDTO;
-import fr.latelier.catmash.entities.Candidate;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ElectionServiceImpl implements ElectionService {
@@ -29,9 +30,14 @@ public class ElectionServiceImpl implements ElectionService {
 
 
     @Override
-    public Candidate findNextCandidate(String idLooseCandidate, String idWinCandidate) {
+    public CandidateDTO displayNextCandidate(String idLooseCandidate, String idWinCandidate) {
         // TODO
         return null;
+    }
+
+    @Override
+    public List<CandidateDTO> displayAllCandidatesSortDesc0rder() {
+        return candidateRepository.findAllCandidatesSortInDesc0rder();
     }
 
 

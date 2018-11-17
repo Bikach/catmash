@@ -1,13 +1,17 @@
 package fr.latelier.catmash.services;
 
-import fr.latelier.catmash.entities.Candidate;
+import fr.latelier.catmash.dto.CandidateDTO;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface ElectionService {
 
     void winnerCandidateUpdate(String idWinCandidate);
     
-    Candidate findNextCandidate(String idLooseCandidate, String idWinCandidate);
+    CandidateDTO displayNextCandidate(String idLooseCandidate, String idWinCandidate);
+
+    List<CandidateDTO> displayAllCandidatesSortDesc0rder();
 
 }

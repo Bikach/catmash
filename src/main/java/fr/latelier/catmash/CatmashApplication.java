@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CatmashApplication implements CommandLineRunner {
 
@@ -50,6 +52,9 @@ public class CatmashApplication implements CommandLineRunner {
 //        System.out.println(candidateDTO.getId());
 
 //        electionServiceImp.winnerCandidateUpdate("3kj");
+
+//        List<CandidateDTO> candidateDTOList = electionServiceImp.displayAllCandidatesSortDesc0rder();
+//        candidateDTOList.forEach(candidateDTO -> System.out.println(candidateDTO.getNumberVote()));
     }
 
 }

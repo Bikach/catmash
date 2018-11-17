@@ -37,12 +37,9 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 
     @Override
     public List<CandidateDTO> findAllCandidatesSortInDesc0rder() {
-        List<CandidateDTO> candidateDTOList = new ArrayList<>();
-        for (Candidate candidate : jpaRepository.findAll(sortByNumberVoteDesc())) {
-            candidateDTOList.add(DTOCast.transfertToCandidateDTO(candidate));
-        }
-        return candidateDTOList;
+        return DTOCast.transfertToCandidateDTOList(jpaRepository.findAll(sortByNumberVoteDesc()));
     }
+
 
     private Sort sortByNumberVoteDesc() {
         return new Sort(Sort.Direction.DESC, "numberVote");
