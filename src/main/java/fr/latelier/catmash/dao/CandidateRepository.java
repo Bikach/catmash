@@ -14,6 +14,6 @@ public interface CandidateRepository {
 
     CandidateDTO findACandidateById(String candidateId);
 
-    List<CandidateDTO> findAllCandidatesSortInDesc0rder();
+    List<CandidateDTO> findAllCandidatesSortDesc0rAscOrder(String sortType);
 
 }

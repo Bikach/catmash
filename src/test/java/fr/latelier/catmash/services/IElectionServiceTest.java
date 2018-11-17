@@ -5,7 +5,6 @@ import fr.latelier.catmash.dao.CandidateRepository;
 import fr.latelier.catmash.dto.CandidateDTO;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -28,7 +27,10 @@ public class IElectionServiceTest {
     @InjectMocks
     private ElectionServiceImpl electionServiceImpl;
 
+    @Mock
     private CandidateDTO candidateDTO;
+
+    @Spy
     private List<CandidateDTO> candidateDTOList;
 
     @Before
@@ -62,9 +64,17 @@ public class IElectionServiceTest {
 
     @Test
     public void shouldReturnCandidatesListSortDescOrder(){
-        when(candidateRepository.findAllCandidatesSortInDesc0rder()).thenReturn(candidateDTOList);
-        List<CandidateDTO> candidateDTOList2 = electionServiceImpl.displayAllCandidatesSortDesc0rder();
-        verify(candidateRepository, times(1)).findAllCandidatesSortInDesc0rder();
+//        when(candidateRepository.findAllCandidatesSortDesc0rAscOrder(anyString())).th;
+        List<CandidateDTO> candidateDTOList2 = electionServiceImpl.displayAllCandidatesSortDesc0rAscOrder("DESC");
+        verify(candidateRepository, times(1)).findAllCandidatesSortDesc0rAscOrder(anyString());
+        assertEquals("c", candidateDTOList2.get(0).getId());
+    }
+
+    @Test
+    public void shouldReturnCandidatesListSortAscOrder(){
+        when(candidateRepository.findAllCandidatesSortDesc0rAscOrder(anyString())).thenReturn(candidateDTOList);
+        List<CandidateDTO> candidateDTOList2 = electionServiceImpl.displayAllCandidatesSortDesc0rAscOrder("ASC");
+        verify(candidateRepository, times(1)).findAllCandidatesSortDesc0rAscOrder(anyString());
         assertEquals("a", candidateDTOList2.get(0).getId());
     }
 

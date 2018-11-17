@@ -7,7 +7,6 @@ import fr.latelier.catmash.entities.Candidate;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,13 +35,22 @@ public class CandidateRepositoryImpl implements CandidateRepository {
     }
 
     @Override
-    public List<CandidateDTO> findAllCandidatesSortInDesc0rder() {
-        return DTOCast.transfertToCandidateDTOList(jpaRepository.findAll(sortByNumberVoteDesc()));
+    public List<CandidateDTO> findAllCandidatesSortDesc0rAscOrder(String sortType) {
+        return DTOCast.transfertToCandidateDTOList(jpaRepository.findAll(sortByNumberVoteDescOrAsc(sortType)));
     }
 
 
-    private Sort sortByNumberVoteDesc() {
-        return new Sort(Sort.Direction.DESC, "numberVote");
+    private Sort sortByNumberVoteDescOrAsc(String sortType) {
+        Sort sort = null;
+        switch (sortType){
+            case"DESC":
+                sort = new Sort(Sort.Direction.DESC, "numberVote");
+                break;
+            case "ASC" :
+                sort =  new Sort(Sort.Direction.ASC, "numberVote");
+                break;
+        }
+        return sort;
     }
 
 

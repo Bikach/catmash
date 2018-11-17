@@ -12,6 +12,6 @@ public interface ElectionService {
     
     CandidateDTO displayNextCandidate(String idLooseCandidate, String idWinCandidate);
 
-    List<CandidateDTO> displayAllCandidatesSortDesc0rder();
+    List<CandidateDTO> displayAllCandidatesSortDesc0rAscOrder(String sortType);
 
 }

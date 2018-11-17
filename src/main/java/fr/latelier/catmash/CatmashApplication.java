@@ -53,8 +53,21 @@ public class CatmashApplication implements CommandLineRunner {
 
 //        electionServiceImp.winnerCandidateUpdate("3kj");
 
-//        List<CandidateDTO> candidateDTOList = electionServiceImp.displayAllCandidatesSortDesc0rder();
-//        candidateDTOList.forEach(candidateDTO -> System.out.println(candidateDTO.getNumberVote()));
+        List<CandidateDTO> candidateDTOList = electionServiceImp.displayAllCandidatesSortDesc0rAscOrder("ASC");
+        candidateDTOList.forEach(candidateDTO -> System.out.println(candidateDTO.getNumberVote()));
+
+//        Queue<String> waitingQueue = new LinkedList<>();
+//        // Adding new elements to the Queue (The Enqueue operation)
+//        waitingQueue.add("Rajeev");
+//        waitingQueue.add("Chris");
+//        waitingQueue.add("John");
+//        waitingQueue.add("Mark");
+//        waitingQueue.add("Steven");
+//
+//        System.out.println("WaitingQueue : " + waitingQueue);
+//        System.out.println(waitingQueue.poll());
+//        System.out.println(waitingQueue.poll());
+//        System.out.println("WaitingQueue : " + waitingQueue);
     }
 
 }

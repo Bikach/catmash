@@ -7,6 +7,7 @@ import fr.latelier.catmash.dto.CandidateDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Queue;
 
 @Service
 public class ElectionServiceImpl implements ElectionService {
@@ -15,7 +16,6 @@ public class ElectionServiceImpl implements ElectionService {
     private static final int A_VOTE = 1;
 
     private CandidateRepository candidateRepository;
-
 
     public ElectionServiceImpl(CandidateRepository candidateRepository){
         this.candidateRepository = candidateRepository;
@@ -31,14 +31,17 @@ public class ElectionServiceImpl implements ElectionService {
 
     @Override
     public CandidateDTO displayNextCandidate(String idLooseCandidate, String idWinCandidate) {
-        // TODO
+        Queue<CandidateDTO> candidateDTOQueue =
+                (Queue<CandidateDTO>) candidateRepository.findAllCandidatesSortDesc0rAscOrder("ASC");
+
         return null;
     }
 
     @Override
-    public List<CandidateDTO> displayAllCandidatesSortDesc0rder() {
-        return candidateRepository.findAllCandidatesSortInDesc0rder();
+    public List<CandidateDTO> displayAllCandidatesSortDesc0rAscOrder(String sortType) {
+        return candidateRepository.findAllCandidatesSortDesc0rAscOrder(sortType);
     }
+
 
 
 }
