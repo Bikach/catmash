@@ -35,23 +35,10 @@ public class CandidateRepositoryImpl implements CandidateRepository {
     }
 
     @Override
-    public List<CandidateDTO> findAllCandidatesSortDesc0rAscOrder(String sortType) {
-        return DTOCast.transfertToCandidateDTOList(jpaRepository.findAll(sortByNumberVoteDescOrAsc(sortType)));
+    public List<CandidateDTO> findAllCandidatesDTO() {
+        return DTOCast.transfertToCandidateDTOList(jpaRepository.findAll());
     }
 
-
-    private Sort sortByNumberVoteDescOrAsc(String sortType) {
-        Sort sort = null;
-        switch (sortType){
-            case"DESC":
-                sort = new Sort(Sort.Direction.DESC, "numberVote");
-                break;
-            case "ASC" :
-                sort =  new Sort(Sort.Direction.ASC, "numberVote");
-                break;
-        }
-        return sort;
-    }
 
 
 }

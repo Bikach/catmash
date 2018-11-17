@@ -39,10 +39,12 @@ public class IElectionServiceTest {
         CandidateDTO cdto1 = new CandidateDTO("a", "http//a", 10);
         CandidateDTO cdto2 = new CandidateDTO("b", "http//b", 20);
         CandidateDTO cdto3 = new CandidateDTO("c", "http//c", 30);
+        CandidateDTO cdto4 = new CandidateDTO("d", "http//d", 40);
         candidateDTOList = new ArrayList<>();
-        candidateDTOList.add(cdto1);
         candidateDTOList.add(cdto2);
         candidateDTOList.add(cdto3);
+        candidateDTOList.add(cdto4);
+        candidateDTOList.add(cdto1);
     }
 
     @Test
@@ -64,17 +66,17 @@ public class IElectionServiceTest {
 
     @Test
     public void shouldReturnCandidatesListSortDescOrder(){
-//        when(candidateRepository.findAllCandidatesSortDesc0rAscOrder(anyString())).th;
+        when(candidateRepository.findAllCandidatesDTO()).thenReturn(candidateDTOList);
         List<CandidateDTO> candidateDTOList2 = electionServiceImpl.displayAllCandidatesSortDesc0rAscOrder("DESC");
-        verify(candidateRepository, times(1)).findAllCandidatesSortDesc0rAscOrder(anyString());
-        assertEquals("c", candidateDTOList2.get(0).getId());
+        verify(candidateRepository, times(1)).findAllCandidatesDTO();
+        assertEquals("d", candidateDTOList2.get(0).getId());
     }
 
     @Test
     public void shouldReturnCandidatesListSortAscOrder(){
-        when(candidateRepository.findAllCandidatesSortDesc0rAscOrder(anyString())).thenReturn(candidateDTOList);
+        when(candidateRepository.findAllCandidatesDTO()).thenReturn(candidateDTOList);
         List<CandidateDTO> candidateDTOList2 = electionServiceImpl.displayAllCandidatesSortDesc0rAscOrder("ASC");
-        verify(candidateRepository, times(1)).findAllCandidatesSortDesc0rAscOrder(anyString());
+        verify(candidateRepository, times(1)).findAllCandidatesDTO();
         assertEquals("a", candidateDTOList2.get(0).getId());
     }
 

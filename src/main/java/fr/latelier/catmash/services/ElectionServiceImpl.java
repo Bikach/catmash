@@ -4,8 +4,12 @@ package fr.latelier.catmash.services;
 import fr.latelier.catmash.dao.CandidateRepository;
 import fr.latelier.catmash.dto.CandidateDTO;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.net.CacheRequest;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Queue;
 
@@ -31,17 +35,29 @@ public class ElectionServiceImpl implements ElectionService {
 
     @Override
     public CandidateDTO displayNextCandidate(String idLooseCandidate, String idWinCandidate) {
-        Queue<CandidateDTO> candidateDTOQueue =
-                (Queue<CandidateDTO>) candidateRepository.findAllCandidatesSortDesc0rAscOrder("ASC");
+        //Queue<CandidateDTO> candidateDTOQueue = (Queue<CandidateDTO>) candidateRepository.findAllCandidatesDTO("ASC");
 
         return null;
     }
 
     @Override
     public List<CandidateDTO> displayAllCandidatesSortDesc0rAscOrder(String sortType) {
-        return candidateRepository.findAllCandidatesSortDesc0rAscOrder(sortType);
+        List<CandidateDTO> candidateDTOList = candidateRepository.findAllCandidatesDTO();
+        Collections.sort(candidateDTOList, sortByNumberVoteDescOrAsc(sortType));
+        return candidateDTOList;
     }
 
-
+    private Comparator<CandidateDTO> sortByNumberVoteDescOrAsc(String sortType) {
+        Comparator<CandidateDTO> candidateDTOComparator = null;
+        switch (sortType){
+            case"DESC":
+                candidateDTOComparator = Comparator.comparing(CandidateDTO::getNumberVote).reversed();
+                break;
+            case "ASC" :
+                candidateDTOComparator =  Comparator.comparing(CandidateDTO::getNumberVote);
+                break;
+        }
+        return candidateDTOComparator;
+    }
 
 }
