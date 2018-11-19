@@ -1,28 +1,28 @@
 package fr.latelier.catmash.services;
 
 
+import fr.latelier.catmash.CatmashApplication;
 import fr.latelier.catmash.dao.CandidateRepository;
 import fr.latelier.catmash.dto.CandidateDTO;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.net.CacheRequest;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ElectionServiceImpl implements ElectionService {
 
 
     private static final int A_VOTE = 1;
+    private static final int MIN = 0;
 
     private CandidateRepository candidateRepository;
+    private CollectionsHandlingService collectionsHandlingService;
 
-    public ElectionServiceImpl(CandidateRepository candidateRepository){
+    public ElectionServiceImpl(CandidateRepository candidateRepository, CollectionsHandlingService collectionsHandlingService){
         this.candidateRepository = candidateRepository;
+        this.collectionsHandlingService = collectionsHandlingService;
     }
 
     @Override
@@ -32,32 +32,24 @@ public class ElectionServiceImpl implements ElectionService {
         candidateRepository.saveCandidate(candidateDTO);
     }
 
+    @Override
+    public CandidateDTO selectTheNextCandidateWhoHasNotAlreadyPresented(String idLooseCandidate, String idWinCandidate) {
+        Queue<CandidateDTO> candidateDTOQueue = collectionsHandlingService.transfertListToQueueSortAscOrder(candidateRepository.findAllCandidatesDTO());
+        collectionsHandlingService.erasesSessionQueueIfItsFull(candidateDTOQueue);
+        candidateDTOQueue = collectionsHandlingService.updateRepoList(candidateDTOQueue, idLooseCandidate, idWinCandidate);
+        CandidateDTO candidateDTO = candidateDTOQueue.poll();
+        CatmashApplication.candidatsAlreadyPresentedList.add(candidateDTO);
+        return candidateDTO;
+    }
+
 
     @Override
-    public CandidateDTO displayNextCandidate(String idLooseCandidate, String idWinCandidate) {
-        //Queue<CandidateDTO> candidateDTOQueue = (Queue<CandidateDTO>) candidateRepository.findAllCandidatesDTO("ASC");
-
-        return null;
+    public List<CandidateDTO> displayAllCandidatesSortDescOrder() {
+        return candidateRepository.findAllCandidatesDTO()
+                .stream()
+                .sorted(Comparator.comparing(CandidateDTO::getNumberVote).reversed())
+                .collect(Collectors.toList());
     }
 
-    @Override
-    public List<CandidateDTO> displayAllCandidatesSortDesc0rAscOrder(String sortType) {
-        List<CandidateDTO> candidateDTOList = candidateRepository.findAllCandidatesDTO();
-        Collections.sort(candidateDTOList, sortByNumberVoteDescOrAsc(sortType));
-        return candidateDTOList;
-    }
-
-    private Comparator<CandidateDTO> sortByNumberVoteDescOrAsc(String sortType) {
-        Comparator<CandidateDTO> candidateDTOComparator = null;
-        switch (sortType){
-            case"DESC":
-                candidateDTOComparator = Comparator.comparing(CandidateDTO::getNumberVote).reversed();
-                break;
-            case "ASC" :
-                candidateDTOComparator =  Comparator.comparing(CandidateDTO::getNumberVote);
-                break;
-        }
-        return candidateDTOComparator;
-    }
 
 }

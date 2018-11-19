@@ -8,10 +8,11 @@ import java.util.List;
 @Service
 public interface ElectionService {
 
+
     void winnerCandidateUpdate(String idWinCandidate);
     
-    CandidateDTO displayNextCandidate(String idLooseCandidate, String idWinCandidate);
+    CandidateDTO selectTheNextCandidateWhoHasNotAlreadyPresented(String idLooseCandidate, String idWinCandidate);
 
-    List<CandidateDTO> displayAllCandidatesSortDesc0rAscOrder(String sortType);
+    List<CandidateDTO> displayAllCandidatesSortDescOrder();
 
 }

@@ -2,8 +2,8 @@ package fr.latelier.catmash.dto;
 
 import fr.latelier.catmash.entities.Candidate;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DTOCast {
 
@@ -17,8 +17,8 @@ public class DTOCast {
     }
 
     public static List<CandidateDTO> transfertToCandidateDTOList(List<Candidate> candidateList){
-        List<CandidateDTO> candidateDTOList = new ArrayList<>();
-        candidateList.forEach(candidate -> candidateDTOList.add(transfertToCandidateDTO(candidate)));
-        return  candidateDTOList;
+        return  candidateList.stream()
+                .map(DTOCast::transfertToCandidateDTO)
+                .collect(Collectors.toList());
     }
 }

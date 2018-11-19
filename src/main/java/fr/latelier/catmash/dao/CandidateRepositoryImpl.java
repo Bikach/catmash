@@ -3,12 +3,9 @@ package fr.latelier.catmash.dao;
 import fr.latelier.catmash.Exception.CandidateException;
 import fr.latelier.catmash.dto.CandidateDTO;
 import fr.latelier.catmash.dto.DTOCast;
-import fr.latelier.catmash.entities.Candidate;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class CandidateRepositoryImpl implements CandidateRepository {
@@ -27,11 +24,9 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 
     @Override
     public CandidateDTO findACandidateById(String candidateId) {
-        Optional<Candidate> candidateOptional = jpaRepository.findById(candidateId);
-        if(!candidateOptional.isPresent())
-            throw new CandidateException(("Ce candidat n'est pas dans la base de données"));
-        Candidate candidate = candidateOptional.get();
-        return DTOCast.transfertToCandidateDTO(candidate);
+        return jpaRepository.findById(candidateId)
+                .map(DTOCast::transfertToCandidateDTO)
+                .orElseThrow(() -> new CandidateException(("Ce candidat n'est pas dans la base de données")));
     }
 
     @Override
